@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "readings": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "current": {
+        ".indexOn": ["timestamp"]
+      },
+      "history": {
+        ".indexOn": ["timestamp"]
+      }
+    },
+    "alerts": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".indexOn": ["timestamp"]
+    },
+    "notifications": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "system": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
