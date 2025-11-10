@@ -553,7 +553,7 @@ This project is open source and available under the [MIT License](LICENSE).
 **Deepak Soni**
 
 [![GitHub](https://img.shields.io/badge/GitHub-deepaksoni47-181717?style=for-the-badge&logo=github)](https://github.com/deepaksoni47)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:deepaksoni47@example.com)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:deepaksoni23022004@gmail.com)
 
 </div>
 
