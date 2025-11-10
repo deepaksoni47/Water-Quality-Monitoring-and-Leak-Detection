@@ -23,15 +23,10 @@ FirebaseData firebaseData;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-// Pin Definitions
-#define TDS_SENSOR_PIN A0 // Analog pin for TDS sensor
-#define IR_SENSOR_PIN D5  // Digital pin for IR sensor
-#define LED_PIN D4        // LED indicator
-
 // TDS Sensor Variables
 float tdsValue = 0;
 float voltage = 0;
-float temperature = 25.0; // Assume constant temp (or add temp sensor)
+float temperature = DEFAULT_TEMPERATURE; // From config.h
 
 // Flow Sensor Variables
 volatile int pulseCount = 0;
@@ -42,19 +37,15 @@ float expectedFlowRate = 0; // Will be fetched from Firebase
 
 // Timing Variables
 unsigned long lastSendTime = 0;
-const unsigned long sendInterval = 15000; // Send data every 15 seconds
 unsigned long lastNotificationTime = 0;
-const unsigned long notificationCooldown = 300000; // 5 minutes between notifications
-
-// Threshold Values
-const float TDS_MIN_THRESHOLD = 50;        // Minimum acceptable TDS (ppm)
-const float TDS_MAX_THRESHOLD = 500;       // Maximum acceptable TDS (ppm)
-const float FLOW_DEVIATION_THRESHOLD = 20; // % deviation allowed
 
 // Status flags
 bool systemInitialized = false;
 bool wifiConnected = false;
 bool firebaseConnected = false;
+
+// Function declarations
+void ICACHE_RAM_ATTR pulseCounter();
 
 void setup()
 {
@@ -104,7 +95,7 @@ void loop()
     calculateFlowRate();
 
     // Send data at regular intervals
-    if (millis() - lastSendTime >= sendInterval)
+    if (millis() - lastSendTime >= SEND_INTERVAL)
     {
         lastSendTime = millis();
 
@@ -198,7 +189,7 @@ void readTDSSensor()
     float compensationVoltage = voltage / compensationCoefficient;
 
     // Convert voltage to TDS (ppm)
-    tdsValue = (133.42 * compensationVoltage * compensationVoltage * compensationVoltage - 255.86 * compensationVoltage * compensationVoltage + 857.39 * compensationVoltage) * 0.5;
+    tdsValue = (133.42 * compensationVoltage * compensationVoltage * compensationVoltage - 255.86 * compensationVoltage * compensationVoltage + 857.39 * compensationVoltage) * TDS_CALIBRATION_FACTOR;
 
     // Ensure non-negative
     if (tdsValue < 0)
@@ -217,9 +208,8 @@ void calculateFlowRate()
 
         // Calculate flow rate (L/min)
         // Formula: Flow (L/min) = (Pulse frequency × 60) / calibration factor
-        // Calibration factor typically ranges from 4.5 to 7.5 (depends on turbine)
-        float calibrationFactor = 5.5; // Adjust based on your turbine
-        flowRate = ((1000.0 / elapsedTime) * pulseCount) / calibrationFactor;
+        // Calibration factor from config.h
+        flowRate = ((1000.0 / elapsedTime) * pulseCount) / FLOW_CALIBRATION_FACTOR;
 
         // Calculate total volume (mL)
         totalMilliLitres += (flowRate / 60.0) * (elapsedTime / 1000.0) * 1000.0;
@@ -349,7 +339,7 @@ void checkAbnormalities()
     }
 
     // Send notification if anomaly detected and cooldown period has passed
-    if (anomalyDetected && (millis() - lastNotificationTime >= notificationCooldown))
+    if (anomalyDetected && (millis() - lastNotificationTime >= NOTIFICATION_COOLDOWN))
     {
         sendNotification(alertMessage);
         lastNotificationTime = millis();
