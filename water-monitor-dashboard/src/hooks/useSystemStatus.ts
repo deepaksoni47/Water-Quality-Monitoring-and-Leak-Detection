@@ -16,10 +16,24 @@ export function useSystemStatus() {
     const unsubscribeSystem = onValue(systemRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
+        const lastUpdate = data.lastUpdate || 0;
+        const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
+        const timeSinceUpdate = currentTime - lastUpdate;
+
+        // Consider device offline if no update in last 60 seconds
+        const isOnline = timeSinceUpdate < 60 && (data.online ?? false);
+
         setSystemInfo({
           expectedFlowRate: data.expectedFlowRate || 0,
-          lastUpdate: data.lastUpdate || Date.now(),
-          online: data.online ?? true,
+          lastUpdate: lastUpdate,
+          online: isOnline,
+        });
+      } else {
+        // No system data means device is offline
+        setSystemInfo({
+          expectedFlowRate: 0,
+          lastUpdate: 0,
+          online: false,
         });
       }
       setLoading(false);

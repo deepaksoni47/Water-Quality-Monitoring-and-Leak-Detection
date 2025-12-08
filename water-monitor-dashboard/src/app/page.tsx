@@ -110,7 +110,7 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <Header isConnected={!!data} />
+          <Header isConnected={systemInfo?.online ?? false} />
         </motion.div>
 
         {/* Notification Permission Banner */}
