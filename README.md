@@ -81,12 +81,12 @@
       </ul>
     </td>
     <td>
-      <h3>☁️ Cloud Integration</h3>
+      <h3>📱 Browser Notifications</h3>
       <ul>
-        <li>Firebase Realtime Database</li>
-        <li>ThingSpeak analytics</li>
-        <li>Secure data transmission</li>
-        <li>Scalable cloud infrastructure</li>
+        <li>Instant push notifications to phone/laptop</li>
+        <li>Works in background/when locked</li>
+        <li>Sound alerts for critical issues</li>
+        <li>One-click to enable permissions</li>
       </ul>
     </td>
   </tr>
@@ -291,6 +291,14 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser 🎉
+
+#### Enable Notifications (Recommended)
+
+1. Click **"Enable Notifications"** banner at the top
+2. Allow notifications when prompted by browser
+3. You'll receive instant alerts for leaks and water quality issues!
+
+See [NOTIFICATION_QUICKSTART.md](NOTIFICATION_QUICKSTART.md) for details.
 
 ### 4️⃣ Deploy Firebase Rules
 
@@ -519,6 +527,7 @@ See [Calibration Guide](docs/calibration-guide.md) for detailed instructions.
 - [x] Leak detection algorithm
 - [x] Real-time dashboard
 - [x] Firebase integration
+- [x] Browser push notifications
 - [ ] Mobile app (React Native)
 - [ ] Email/SMS notifications
 - [ ] Machine learning predictions

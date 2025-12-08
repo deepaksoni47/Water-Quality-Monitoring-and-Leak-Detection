@@ -9,14 +9,20 @@ import AlertsList from "@/components/Dashboard/AlertsList";
 import SettingsPanel from "@/components/Dashboard/SettingsPanel";
 import TDSChart from "@/components/Charts/TDSChart";
 import FlowChart from "@/components/Charts/FlowChart";
+import NotificationPermission from "@/components/Notifications/NotificationPermission";
+import NotificationSettings from "@/components/Notifications/NotificationSettings";
 import { useRealtimeData } from "@/hooks/useRealtimeData";
 import { useAlerts } from "@/hooks/useAlerts";
 import { useSystemStatus } from "@/hooks/useSystemStatus";
+import { useNotifications } from "@/hooks/useNotifications";
 
 export default function Dashboard() {
   const { data, loading, error } = useRealtimeData();
   const { alerts } = useAlerts();
   const { systemInfo, notification } = useSystemStatus();
+
+  // Initialize notifications
+  useNotifications();
 
   const getTDSStatus = (tds: number) => {
     if (tds < 50)
@@ -68,6 +74,11 @@ export default function Dashboard() {
     <div className="min-h-screen bg-dark-bg">
       <div className="max-w-7xl mx-auto p-6">
         <Header isConnected={!!data} />
+
+        {/* Notification Permission Banner */}
+        <div className="mb-6">
+          <NotificationPermission />
+        </div>
 
         {notification?.unread && (
           <AlertBanner
@@ -149,6 +160,11 @@ export default function Dashboard() {
             />
             <SettingsPanel currentExpectedFlow={data?.expectedFlow || 0} />
           </div>
+        </section>
+
+        {/* Notification Settings */}
+        <section className="mb-8">
+          <NotificationSettings />
         </section>
 
         {/* Alerts List */}
