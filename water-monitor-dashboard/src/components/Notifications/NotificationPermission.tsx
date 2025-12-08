@@ -77,10 +77,10 @@ export default function NotificationPermission() {
           </div>
         </div>
         <div className="flex-1">
-          <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-1">
+          <h3 className="text-white font-semibold text-lg mb-1">
             Enable Alert Notifications
           </h3>
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
+          <p className="text-gray-300 text-sm mb-4">
             Get instant notifications on your device when water quality issues
             or leaks are detected. Works on phone and laptop!
           </p>
@@ -108,7 +108,7 @@ export default function NotificationPermission() {
             </button>
             <button
               onClick={() => setShowBanner(false)}
-              className="px-4 py-2 rounded-lg font-semibold bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all"
+              className="px-4 py-2 rounded-lg font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all"
             >
               Maybe Later
             </button>

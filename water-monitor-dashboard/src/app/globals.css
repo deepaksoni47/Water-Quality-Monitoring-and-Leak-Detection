@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fa;
-  --foreground: #1a1a2e;
-  --card-bg: #ffffff;
-  --text-primary: #1a1a2e;
-  --text-secondary: #64748b;
-  --border-color: #e2e8f0;
+  --background: #1a1a2e;
+  --foreground: #ededed;
+  --card-bg: #16213e;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
 }
 
 @theme inline {
@@ -14,27 +14,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a1a2e;
-    --foreground: #ededed;
-    --card-bg: #16213e;
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-  }
-}
-
-/* Dark mode class */
-.dark {
-  --background: #1a1a2e;
-  --foreground: #ededed;
-  --card-bg: #16213e;
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --border-color: #334155;
 }
 
 /* Custom Tailwind utilities for CSS variables */

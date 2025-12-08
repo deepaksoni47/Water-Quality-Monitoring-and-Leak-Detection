@@ -94,7 +94,7 @@ export default function FlowChart() {
 
   if (loading) {
     return (
-      <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 shadow-lg">
+      <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
         </div>
@@ -103,7 +103,7 @@ export default function FlowChart() {
   }
 
   return (
-    <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 shadow-lg hover:border-primary/30 transition-all duration-300">
+    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg hover:border-primary/30 transition-all duration-300">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center">

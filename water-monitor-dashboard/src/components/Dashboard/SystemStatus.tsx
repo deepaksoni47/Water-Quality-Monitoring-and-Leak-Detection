@@ -40,7 +40,7 @@ export default function SystemStatus({
     : "Never";
 
   return (
-    <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
         <Activity className="w-6 h-6" />
         System Status
@@ -48,14 +48,14 @@ export default function SystemStatus({
 
       <div className="space-y-4">
         {/* Connection Status */}
-        <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-gray-800">
           <div className="flex items-center gap-3">
             {isOnline ? (
               <Wifi className="w-5 h-5 text-success" />
             ) : (
               <WifiOff className="w-5 h-5 text-danger" />
             )}
-            <span className="text-gray-700 dark:text-gray-300">Connection</span>
+            <span className="text-gray-300">Connection</span>
           </div>
           <span
             className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -69,10 +69,10 @@ export default function SystemStatus({
         </div>
 
         {/* System Status */}
-        <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-gray-800">
           <div className="flex items-center gap-3">
             {statusConfig.icon}
-            <span className="text-gray-700 dark:text-gray-300">Status</span>
+            <span className="text-gray-300">Status</span>
           </div>
           <span
             className={`px-3 py-1 rounded-full text-xs font-semibold ${statusConfig.class}`}
@@ -82,25 +82,19 @@ export default function SystemStatus({
         </div>
 
         {/* Last Update */}
-        <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-gray-800">
           <div className="flex items-center gap-3">
             <Clock className="w-5 h-5 text-gray-400" />
-            <span className="text-gray-700 dark:text-gray-300">
-              Last Update
-            </span>
+            <span className="text-gray-300">Last Update</span>
           </div>
-          <span className="text-gray-600 dark:text-gray-400 text-sm">
-            {lastUpdate}
-          </span>
+          <span className="text-gray-400 text-sm">{lastUpdate}</span>
         </div>
 
         {/* Expected Flow Rate */}
         {systemInfo?.expectedFlowRate !== undefined && (
-          <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
-            <span className="text-gray-700 dark:text-gray-300">
-              Expected Flow
-            </span>
-            <span className="text-gray-900 dark:text-white font-semibold">
+          <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-gray-800">
+            <span className="text-gray-300">Expected Flow</span>
+            <span className="text-white font-semibold">
               {systemInfo.expectedFlowRate.toFixed(2)} L/min
             </span>
           </div>
