@@ -20,11 +20,11 @@ Edit `arduino/water_monitoring_system/secrets.h`:
 
 ### 3️⃣ Create Firebase User
 
-1. Go to [Firebase Console](https://console.firebase.google.com/project/water-quality-and-leak-detect/authentication/users)
+1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Click **Authentication** → **Add user**
 3. Enter:
-   - Email: `waterqualityuser@gmail.com`
-   - Password: `esp8266pass`
+   - Email: `your-firebase-user@example.com`
+   - Password: `your-secure-password`
 4. Click **Add user**
 
 ### 4️⃣ Set Database Rules
@@ -88,19 +88,19 @@ https://your-app.vercel.app
 
 ### Firebase (Already Configured ✅)
 
-- **Project**: water-quality-and-leak-detect
-- **Region**: Asia Southeast 1
-- **Database**: https://water-quality-and-leak-detect-default-rtdb.asia-southeast1.firebasedatabase.app
+- **Project**: YOUR_FIREBASE_PROJECT_ID
+- **Region**: YOUR_REGION
+- **Database**: https://YOUR-PROJECT-ID-default-rtdb.REGION.firebasedatabase.app
 
-### ThingSpeak (Already Configured ✅)
+### ThingSpeak (Already Configured ✓)
 
-- **Write API Key**: YK86J7S3HOWAZKQX
+- **Write API Key**: YOUR_THINGSPEAK_API_KEY
 - **View**: https://thingspeak.com/channels/your_channel_id
 
 ### Authentication
 
-- **Email**: waterqualityuser@gmail.com
-- **Password**: esp8266pass
+- **Email**: your-firebase-user@example.com
+- **Password**: your-secure-password
 
 ---
 

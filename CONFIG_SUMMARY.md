@@ -228,14 +228,14 @@ You'll know everything is working when:
 - **URL**: https://console.firebase.google.com/project/water-quality-and-leak-detect
 - **Project**: water-quality-and-leak-detect
 
-### Device Authentication
+#### Firebase Authentication
 
-- **Email**: waterqualityuser@gmail.com
-- **Password**: esp8266pass
+- **Email**: your-firebase-user@example.com
+- **Password**: your-secure-password
 
-### ThingSpeak
+#### ThingSpeak
 
-- **Write API Key**: YK86J7S3HOWAZKQX
+- **Write API Key**: YOUR_THINGSPEAK_API_KEY
 - **Dashboard**: https://thingspeak.com/channels/your_channel
 
 ### Database

@@ -31,14 +31,14 @@ Your ESP8266 is already configured with these credentials:
 
 ### Firebase Settings (Already Configured ✓)
 
-- **API Key**: `AIzaSyBJ_h8HoBu_5Jm43VfcPRS6M5xef7KO1uY`
-- **Database URL**: `https://water-quality-and-leak-detect-default-rtdb.asia-southeast1.firebasedatabase.app`
-- **Auth Email**: `waterqualityuser@gmail.com`
-- **Auth Password**: `esp8266pass`
+- **API Key**: `YOUR_FIREBASE_API_KEY`
+- **Database URL**: `https://YOUR-PROJECT-ID-default-rtdb.REGION.firebasedatabase.app`
+- **Auth Email**: `your-firebase-user@example.com`
+- **Auth Password**: `your-firebase-password`
 
 ### ThingSpeak Settings (Already Configured ✓)
 
-- **API Key**: `YK86J7S3HOWAZKQX`
+- **API Key**: `YOUR_THINGSPEAK_API_KEY`
 
 ### 🔧 Update WiFi Credentials
 
@@ -57,9 +57,9 @@ Your ESP8266 is already configured with these credentials:
 Your dashboard is already configured with Firebase credentials in `.env.local`:
 
 ```env
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBJ_h8HoBu_5Jm43VfcPRS6M5xef7KO1uY
-NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://water-quality-and-leak-detect-default-rtdb.asia-southeast1.firebasedatabase.app
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=water-quality-and-leak-detect
+NEXT_PUBLIC_FIREBASE_API_KEY=YOUR_FIREBASE_API_KEY
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://YOUR-PROJECT-ID-default-rtdb.REGION.firebasedatabase.app
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
 # ... and more
 ```
 
@@ -110,8 +110,8 @@ Your Firebase Realtime Database needs proper security rules. Update them at:
 1. Go to **Firebase Console → Authentication**
 2. Enable **Email/Password** authentication
 3. Add a user with:
-   - Email: `waterqualityuser@gmail.com`
-   - Password: `esp8266pass`
+   - Email: `your-firebase-user@example.com`
+   - Password: `your-secure-password`
 
 ---
 
