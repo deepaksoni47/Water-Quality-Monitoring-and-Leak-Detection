@@ -11,8 +11,9 @@ export const metadata: Metadata = {
     "Real-time water quality monitoring and leakage detection system",
   manifest: "/manifest.json",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/drop.png",
+    apple: "/drop.png",
+    shortcut: "/drop.png",
   },
   appleWebApp: {
     capable: true,
