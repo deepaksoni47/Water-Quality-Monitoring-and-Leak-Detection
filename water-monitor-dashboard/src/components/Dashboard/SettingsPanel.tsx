@@ -54,7 +54,7 @@ export default function SettingsPanel({
   const hasChanges = expectedFlow !== currentExpectedFlow;
 
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
         <Settings className="w-6 h-6" />
         Settings
@@ -76,7 +76,7 @@ export default function SettingsPanel({
             min="0"
             value={expectedFlow}
             onChange={(e) => setExpectedFlow(parseFloat(e.target.value) || 0)}
-            className="w-full bg-dark-bg border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             placeholder="Enter expected flow rate"
           />
           <p className="text-gray-500 text-sm mt-2">
@@ -113,8 +113,8 @@ export default function SettingsPanel({
             disabled={!hasChanges || saving}
             className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
               hasChanges && !saving
-                ? "bg-gray-800 text-white hover:bg-gray-700 border border-gray-700"
-                : "bg-gray-900 text-gray-600 cursor-not-allowed border border-gray-800"
+                ? "bg-gray-800 text-white hover:bg-gray-700 border border-gray-400"
+                : "bg-gray-900 text-gray-600 cursor-not-allowed border border-gray-400"
             }`}
           >
             <RefreshCw className="w-5 h-5" />

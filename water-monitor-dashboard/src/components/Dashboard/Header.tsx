@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export default function Header({ isConnected }: HeaderProps) {
   return (
-    <header className="bg-dark-card rounded-xl p-6 shadow-lg mb-6">
+    <header className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg mb-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="bg-primary/20 p-3 rounded-full">

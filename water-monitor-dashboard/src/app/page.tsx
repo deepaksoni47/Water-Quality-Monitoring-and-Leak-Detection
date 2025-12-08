@@ -103,7 +103,7 @@ export default function Dashboard() {
     : { text: "Waiting...", class: "bg-gray-500/20 text-gray-400" };
 
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       <div className="max-w-7xl mx-auto p-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -300,7 +300,7 @@ export default function Dashboard() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.3 }}
         >
-          <p>&copy; 2024 Water Quality Monitoring System</p>
+          <p>&copy; 2025 Water Quality Monitoring System</p>
           <p className="mt-1">Refresh Rate: 15 seconds</p>
         </motion.footer>
       </div>

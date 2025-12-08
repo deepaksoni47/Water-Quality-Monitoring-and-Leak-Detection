@@ -40,7 +40,7 @@ export default function SystemStatus({
     : "Never";
 
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
         <Activity className="w-6 h-6" />
         System Status
@@ -92,7 +92,7 @@ export default function SystemStatus({
 
         {/* Expected Flow Rate */}
         {systemInfo?.expectedFlowRate !== undefined && (
-          <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-gray-800">
+          <div className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
             <span className="text-gray-300">Expected Flow</span>
             <span className="text-white font-semibold">
               {systemInfo.expectedFlowRate.toFixed(2)} L/min

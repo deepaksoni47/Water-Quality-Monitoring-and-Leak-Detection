@@ -27,7 +27,7 @@ export default function NotificationSettings() {
   };
 
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Settings className="w-5 h-5 text-primary" />
@@ -45,7 +45,7 @@ export default function NotificationSettings() {
 
       {/* Status Summary */}
       <div className="mb-4">
-        <div className="flex items-center gap-3 p-3 bg-dark-bg rounded-lg">
+        <div className="flex items-center gap-3 p-3 bg-white/10 backdrop-blur-sm rounded-lg">
           {enabled ? (
             <>
               <BellRing className="w-5 h-5 text-success animate-pulse" />
@@ -109,7 +109,7 @@ export default function NotificationSettings() {
           )}
 
           {/* Sound Settings */}
-          <div className="p-4 bg-dark-bg rounded-lg border border-gray-800">
+          <div className="p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {soundEnabled ? (
@@ -183,7 +183,7 @@ export default function NotificationSettings() {
           {enabled && (
             <button
               onClick={handleTestNotification}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all font-medium border border-gray-700"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all font-medium border border-gray-400"
             >
               <Bell className="w-4 h-4" />
               Send Test Notification

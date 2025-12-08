@@ -58,7 +58,7 @@ export default function NotificationPermission() {
     return (
       <button
         onClick={() => setShowBanner(true)}
-        className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-primary/50 transition-all"
+        className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-400 rounded-lg hover:border-primary/50 transition-all"
       >
         <BellOff className="w-5 h-5 text-gray-400" />
         <span className="text-gray-700 dark:text-gray-300 text-sm">

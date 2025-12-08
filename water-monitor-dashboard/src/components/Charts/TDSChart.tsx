@@ -44,7 +44,7 @@ export default function TDSChart() {
   }, []);
 
   return (
-    <div className="bg-dark-card rounded-xl p-6 shadow-lg border border-gray-800\">
+    <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg">
       <h3 className="text-lg font-semibold text-gray-300 mb-4">TDS History</h3>
 
       <ResponsiveContainer width="100%" height={300}>

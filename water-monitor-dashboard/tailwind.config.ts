@@ -14,8 +14,8 @@ const config: Config = {
         warning: "#FF9800",
         danger: "#F44336",
         dark: {
-          bg: "#1a1a2e",
-          card: "#16213e",
+          bg: "transparent",
+          card: "rgba(255, 255, 255, 0.05)",
         },
       },
       animation: {

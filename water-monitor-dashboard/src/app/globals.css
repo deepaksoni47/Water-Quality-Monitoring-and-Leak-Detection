@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1a1a2e;
+  --background: #000000;
   --foreground: #ededed;
-  --card-bg: #16213e;
+  --card-bg: rgba(255, 255, 255, 0.05);
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
-  --border-color: #334155;
+  --border-color: rgba(255, 255, 255, 0.2);
 }
 
 @theme inline {
@@ -19,7 +19,9 @@
 /* Custom Tailwind utilities for CSS variables */
 @layer utilities {
   .bg-card-bg {
-    background-color: var(--card-bg);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   
   .text-foreground {
@@ -27,7 +29,7 @@
   }
   
   .border-themed {
-    border-color: var(--border-color);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 }
 
