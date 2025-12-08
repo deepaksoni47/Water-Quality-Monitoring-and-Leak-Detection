@@ -35,6 +35,11 @@ float flowRate = 0;
 float totalMilliLitres = 0;
 float expectedFlowRate = 0; // Will be fetched from Firebase
 
+// Leak Detection Variables
+bool leakDetected = false;
+bool previousLeakState = false;
+unsigned long leakDetectedTime = 0;
+
 // Timing Variables
 unsigned long lastSendTime = 0;
 unsigned long lastNotificationTime = 0;
@@ -53,12 +58,13 @@ void setup()
     Serial.println("\n\nWater Monitoring System Starting...");
 
     // Pin setup
-    pinMode(IR_SENSOR_PIN, INPUT_PULLUP);
+    pinMode(FLOW_SENSOR_PIN, INPUT_PULLUP);
+    pinMode(LEAK_SENSOR_PIN, INPUT_PULLUP);
     pinMode(LED_PIN, OUTPUT);
     pinMode(TDS_SENSOR_PIN, INPUT);
 
     // Attach interrupt for flow sensor
-    attachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN), pulseCounter, FALLING);
+    attachInterrupt(digitalPinToInterrupt(FLOW_SENSOR_PIN), pulseCounter, FALLING);
 
     // Connect to WiFi
     connectWiFi();
@@ -93,6 +99,7 @@ void loop()
     // Read sensors
     readTDSSensor();
     calculateFlowRate();
+    checkLeakSensor();
 
     // Send data at regular intervals
     if (millis() - lastSendTime >= SEND_INTERVAL)
@@ -142,11 +149,13 @@ void connectWiFi()
         Serial.print("IP Address: ");
         Serial.println(WiFi.localIP());
         wifiConnected = true;
+        digitalWrite(LED_PIN, HIGH); // Turn on LED when connected
     }
     else
     {
         Serial.println("\nWiFi connection failed!");
         wifiConnected = false;
+        digitalWrite(LED_PIN, LOW); // Turn off LED when disconnected
     }
 }
 
@@ -204,7 +213,7 @@ void calculateFlowRate()
     if (elapsedTime >= 1000)
     { // Calculate every second
         // Disable interrupts while reading pulse count
-        detachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN));
+        detachInterrupt(digitalPinToInterrupt(FLOW_SENSOR_PIN));
 
         // Calculate flow rate (L/min)
         // Formula: Flow (L/min) = (Pulse frequency × 60) / calibration factor
@@ -219,7 +228,51 @@ void calculateFlowRate()
         oldTime = currentTime;
 
         // Re-enable interrupts
-        attachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN), pulseCounter, FALLING);
+        attachInterrupt(digitalPinToInterrupt(FLOW_SENSOR_PIN), pulseCounter, FALLING);
+    }
+}
+
+void checkLeakSensor()
+{
+    // Read leak sensor (LOW = short circuit detected = water present)
+    int leakSensorValue = digitalRead(LEAK_SENSOR_PIN);
+
+    if (leakSensorValue == LOW)
+    {
+        if (!leakDetected)
+        {
+            // New leak detected
+            leakDetected = true;
+            leakDetectedTime = millis();
+            Serial.println("*** LEAK DETECTED - Water drop detected on sensor! ***");
+
+            // Send immediate notification
+            sendNotification("LEAK ALERT: Water drops detected on leak sensor!");
+
+            // Log to Firebase
+            if (firebaseConnected)
+            {
+                Firebase.setBool(firebaseData, "/system/leakDetected", true);
+                Firebase.setInt(firebaseData, "/system/leakDetectedTime", (int)time(nullptr));
+            }
+
+            // Flash LED rapidly
+            blinkLED(15);
+        }
+    }
+    else
+    {
+        if (leakDetected)
+        {
+            // Leak cleared
+            Serial.println("Leak sensor cleared");
+            leakDetected = false;
+
+            if (firebaseConnected)
+            {
+                Firebase.setBool(firebaseData, "/system/leakDetected", false);
+            }
+        }
     }
 }
 
@@ -258,6 +311,7 @@ void sendDataToFirebase()
     json.set("flowRate", flowRate);
     json.set("totalVolume", totalMilliLitres / 1000.0); // Convert to liters
     json.set("expectedFlow", expectedFlowRate);
+    json.set("leak", leakDetected);
     json.set("timestamp", (int)now);
     json.set("status", getSystemStatus());
 
@@ -319,6 +373,13 @@ void checkAbnormalities()
     bool anomalyDetected = false;
     String alertMessage = "";
 
+    // Check for physical leak detection first (highest priority)
+    if (leakDetected)
+    {
+        anomalyDetected = true;
+        alertMessage += "CRITICAL: Physical leak detected by sensor! ";
+    }
+
     // Check TDS levels
     if (tdsValue < TDS_MIN_THRESHOLD || tdsValue > TDS_MAX_THRESHOLD)
     {
@@ -374,6 +435,12 @@ void sendNotification(String message)
 
 String getSystemStatus()
 {
+    // Physical leak detection has highest priority
+    if (leakDetected)
+    {
+        return "LEAKAGE_DETECTED";
+    }
+
     if (tdsValue < TDS_MIN_THRESHOLD || tdsValue > TDS_MAX_THRESHOLD)
     {
         return "WATER_QUALITY_ISSUE";
@@ -406,6 +473,8 @@ void printSensorData()
     Serial.print("Total Volume: ");
     Serial.print(totalMilliLitres / 1000.0);
     Serial.println(" L");
+    Serial.print("Leak Sensor: ");
+    Serial.println(leakDetected ? "LEAK DETECTED!" : "Normal");
     Serial.print("Status: ");
     Serial.println(getSystemStatus());
     Serial.println("====================================\n");

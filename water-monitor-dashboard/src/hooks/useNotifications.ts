@@ -58,7 +58,7 @@ export function useNotifications() {
         // Show welcome notification
         new Notification("Water Monitor Notifications Enabled", {
           body: "You will now receive alerts for water quality issues and leaks.",
-          icon: "/water-icon.png",
+          icon: "/drop.png",
           badge: "/badge-icon.png",
           tag: "welcome",
         });
@@ -73,34 +73,59 @@ export function useNotifications() {
 
   // Send notification
   const sendNotification = useCallback(
-    (title: string, options?: ExtendedNotificationOptions) => {
+    async (title: string, options?: ExtendedNotificationOptions) => {
       if (!notificationState.enabled) {
         console.log("Notifications not enabled");
         return;
       }
 
       try {
-        const notification = new Notification(title, {
-          icon: "/water-icon.png",
-          badge: "/badge-icon.png",
-          requireInteraction: true,
-          ...(options as NotificationOptions),
-        } as NotificationOptions);
+        // Check if service worker is available (for PWA)
+        if (
+          "serviceWorker" in navigator &&
+          navigator.serviceWorker.controller
+        ) {
+          const registration = await navigator.serviceWorker.ready;
 
-        // Auto-close after 10 seconds if not interacted with
-        setTimeout(() => {
-          notification.close();
-        }, 10000);
+          // Show notification via service worker for PWA
+          await registration.showNotification(title, {
+            icon: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=192&h=192&fit=crop",
+            badge:
+              "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=96&h=96&fit=crop",
+            requireInteraction: true,
+            vibrate: [200, 100, 200],
+            ...(options as NotificationOptions),
+          } as NotificationOptions);
 
-        // Handle notification click
-        notification.onclick = () => {
-          window.focus();
-          notification.close();
-        };
+          console.log("Notification shown via service worker");
+        } else {
+          // Fallback to standard notification API
+          const notification = new Notification(title, {
+            icon: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=192&h=192&fit=crop",
+            badge:
+              "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=96&h=96&fit=crop",
+            requireInteraction: true,
+            ...(options as NotificationOptions),
+          } as NotificationOptions);
 
-        return notification;
+          // Auto-close after 10 seconds if not interacted with
+          setTimeout(() => {
+            notification.close();
+          }, 10000);
+
+          // Handle notification click
+          notification.onclick = () => {
+            window.focus();
+            notification.close();
+          };
+
+          console.log("Notification shown via Notification API");
+        }
+
+        return true;
       } catch (error) {
         console.error("Error showing notification:", error);
+        return null;
       }
     },
     [notificationState.enabled]

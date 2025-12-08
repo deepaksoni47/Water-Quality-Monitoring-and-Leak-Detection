@@ -25,8 +25,9 @@
 
 // Pin Definitions
 #define TDS_SENSOR_PIN A0
-#define IR_SENSOR_PIN D5
-#define LED_PIN D4
+#define FLOW_SENSOR_PIN D6      // Flow turbine with IR sensor
+#define LEAK_SENSOR_PIN D5      // Water leak detection (short circuit)
+#define LED_PIN LED_BUILTIN
 
 // Temperature (if not using temp sensor)
 #define DEFAULT_TEMPERATURE 25.0
