@@ -5,28 +5,28 @@
       "flowRate": 1.8,
       "expectedFlow": 2.0,
       "totalVolume": 15.5,
+      "dropLeakage": false,
       "timestamp": 1733702400000,
-      "status": "NORMAL",
-      "leak": false
+      "status": "NORMAL"
     },
     "history": {
       "-O9xK1ZmPqR": {
         "tds": 230,
         "flowRate": 1.7,
-        "timestamp": 1733698800000,
-        "leak": false
+        "dropLeakage": false,
+        "timestamp": 1733698800000
       },
       "-O9xK2AbCdE": {
         "tds": 250,
         "flowRate": 1.9,
-        "timestamp": 1733699400000,
-        "leak": false
+        "dropLeakage": false,
+        "timestamp": 1733699400000
       },
       "-O9xK3FgHiJ": {
         "tds": 240,
         "flowRate": 1.75,
-        "timestamp": 1733700000000,
-        "leak": false
+        "dropLeakage": false,
+        "timestamp": 1733700000000
       }
     }
   },

@@ -1,6 +1,12 @@
 "use client";
 
-import { Droplets, Wind, TrendingUp, Database } from "lucide-react";
+import {
+  Droplets,
+  Wind,
+  TrendingUp,
+  Database,
+  AlertTriangle,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import Header from "@/components/Dashboard/Header";
@@ -52,6 +58,12 @@ export default function Dashboard() {
     return { text: "Possible Leakage", class: "bg-danger/20 text-danger" };
   };
 
+  const getDropLeakageStatus = (dropLeakage: boolean) => {
+    return dropLeakage
+      ? { text: "Drop Detected", class: "bg-danger/20 text-danger" }
+      : { text: "No Drops", class: "bg-success/20 text-success" };
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-light-bg dark:bg-dark-bg flex items-center justify-center">
@@ -101,6 +113,9 @@ export default function Dashboard() {
   const flowStatus = data
     ? getFlowStatus(data.flowRate, data.expectedFlow)
     : { text: "Waiting...", class: "bg-gray-500/20 text-gray-400" };
+  const dropLeakageStatus = data
+    ? getDropLeakageStatus(data.dropLeakage)
+    : { text: "Waiting...", class: "bg-gray-500/20 text-gray-400" };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
@@ -146,7 +161,7 @@ export default function Dashboard() {
           >
             Current Readings
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,6 +207,26 @@ export default function Dashboard() {
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
               <MetricCard
+                title="Drop Leakage"
+                value={data?.dropLeakage ? "DETECTED" : "NONE"}
+                status={dropLeakageStatus.text}
+                statusClass={dropLeakageStatus.class}
+                icon={
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-red-600 to-orange-500 flex items-center justify-center">
+                    <AlertTriangle className="w-7 h-7 text-white" />
+                  </div>
+                }
+                info="Physical sensor (D5)"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <MetricCard
                 title="Expected Flow"
                 value={
                   data ? `${data.expectedFlow.toFixed(2)} L/min` : "-- L/min"
@@ -208,7 +243,7 @@ export default function Dashboard() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
               <MetricCard

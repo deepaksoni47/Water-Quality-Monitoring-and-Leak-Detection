@@ -5,13 +5,14 @@
 <p align="center">
   <img src="https://img.shields.io/badge/IoT-Enabled-blue?style=for-the-badge&logo=internetofthings" alt="IoT Enabled">
   <img src="https://img.shields.io/badge/ESP8266-NodeMCU-red?style=for-the-badge&logo=espressif" alt="ESP8266">
-  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js">
   <img src="https://img.shields.io/badge/Firebase-Realtime-orange?style=for-the-badge&logo=firebase" alt="Firebase">
   <img src="https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript" alt="TypeScript">
+  <img src="https://img.shields.io/badge/PWA-Ready-purple?style=for-the-badge&logo=pwa" alt="PWA">
 </p>
 
 <p align="center">
-  <strong>Real-time water quality monitoring and intelligent leak detection powered by IoT</strong>
+  <strong>Real-time water quality monitoring and intelligent leak detection powered by IoT with modern glassmorphism UI</strong>
 </p>
 
 <p align="center">
@@ -37,36 +38,36 @@
         <li>Real-time TDS (Total Dissolved Solids) measurement</li>
         <li>Temperature-compensated readings</li>
         <li>Quality status indicators (Good/Poor/Too Low)</li>
-        <li>Configurable threshold alerts</li>
+        <li>Configurable threshold alerts (50-500 ppm)</li>
       </ul>
     </td>
     <td>
       <h3>🚰 Flow Rate Tracking</h3>
       <ul>
-        <li>Precise flow rate measurement using turbine sensor</li>
-        <li>Total volume calculation</li>
+        <li>Precise flow rate measurement (D6 turbine sensor)</li>
+        <li>Total volume calculation in real-time</li>
         <li>Expected vs actual flow comparison</li>
-        <li>Real-time flow visualization</li>
+        <li>Interactive flow visualization charts</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>
-      <h3>🔍 Intelligent Leak Detection</h3>
+      <h3>🔍 Physical Leak Detection</h3>
       <ul>
-        <li>Automatic anomaly detection</li>
-        <li>Deviation threshold monitoring (20% default)</li>
-        <li>Instant notifications on leakage</li>
-        <li>Historical pattern analysis</li>
+        <li>Direct water drop detection (D5 sensor)</li>
+        <li>Short-circuit based leak sensing</li>
+        <li>Instant critical alerts with LED flash</li>
+        <li>Automatic leak status tracking</li>
       </ul>
     </td>
     <td>
-      <h3>📊 Real-time Dashboard</h3>
+      <h3>📊 Modern Dashboard (PWA)</h3>
       <ul>
-        <li>Modern, responsive web interface</li>
+        <li>Glassmorphism UI with dark gradient</li>
+        <li>Installable Progressive Web App</li>
         <li>Live data updates every 15 seconds</li>
-        <li>Interactive charts and graphs</li>
-        <li>Mobile-friendly design</li>
+        <li>Smooth framer-motion animations</li>
       </ul>
     </td>
   </tr>
@@ -74,19 +75,19 @@
     <td>
       <h3>🔔 Smart Notifications</h3>
       <ul>
-        <li>Real-time alerts on abnormalities</li>
-        <li>Email/push notification support</li>
-        <li>Cooldown period to prevent spam</li>
-        <li>Alert history tracking</li>
+        <li>Service worker-based push notifications</li>
+        <li>Works on locked/background screens</li>
+        <li>Sound alerts for critical issues</li>
+        <li>De-duplication to prevent spam</li>
       </ul>
     </td>
     <td>
-      <h3>📱 Browser Notifications</h3>
+      <h3>☁️ Cloud Integration</h3>
       <ul>
-        <li>Instant push notifications to phone/laptop</li>
-        <li>Works in background/when locked</li>
-        <li>Sound alerts for critical issues</li>
-        <li>One-click to enable permissions</li>
+        <li>Firebase Realtime Database sync</li>
+        <li>ThingSpeak analytics platform</li>
+        <li>Historical data storage</li>
+        <li>60-second online/offline detection</li>
       </ul>
     </td>
   </tr>
@@ -158,16 +159,23 @@ LED         → D4 (Built-in LED)
 - GND → GND
 - Signal → A0
 
-**Flow Sensor + IR Sensor:**
+**Flow Sensor (Turbine + IR):**
 
 - VCC → 5V (external if available)
 - GND → GND
-- Signal → D5
+- Signal → D6
 
-**LED:**
+**Leak Detection Sensor:**
 
-- Anode (+) → D4
-- Cathode (-) → GND (through 220Ω resistor)
+- Terminal 1 → D5
+- Terminal 2 → GND
+- (Forms short circuit when water drops detected)
+
+**LED (Built-in):**
+
+- Uses `LED_BUILTIN` (NodeMCU onboard LED)
+- Turns ON when WiFi connected
+- Blinks during alerts
 
 </details>
 
@@ -198,6 +206,7 @@ LED         → D4 (Built-in LED)
         <li>npm or yarn</li>
         <li>Firebase account</li>
         <li>ThingSpeak account (optional)</li>
+        <li>Modern browser with PWA support</li>
       </ul>
     </td>
   </tr>
@@ -224,7 +233,7 @@ cd Water-Quality-Monitoring-and-Leak-Detection
 #### Configure Credentials
 
 1. Navigate to `arduino/water_monitoring_system/`
-2. Open `secrets.h`
+2. Copy `secrets.h.example` to `secrets.h`
 3. Add your credentials:
 
 ```cpp
@@ -234,11 +243,11 @@ cd Water-Quality-Monitoring-and-Leak-Detection
 
 // Firebase Configuration
 #define FIREBASE_API_KEY "your_firebase_api_key"
-#define FIREBASE_DATABASE_URL "https://your-project.firebaseio.com"
+#define FIREBASE_DATABASE_URL "https://your-project.asia-southeast1.firebasedatabase.app"
 #define FIREBASE_USER_EMAIL "your-email@example.com"
 #define FIREBASE_USER_PASSWORD "your_firebase_password"
 
-// ThingSpeak Configuration
+// ThingSpeak Configuration (Optional)
 #define THINGSPEAK_API_KEY "your_thingspeak_api_key"
 ```
 

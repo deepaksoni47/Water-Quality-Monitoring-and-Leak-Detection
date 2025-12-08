@@ -30,6 +30,12 @@ export default function SystemStatus({
           class: "bg-danger/20 text-danger",
           icon: <Activity className="w-5 h-5" />,
         };
+      case "DROP_LEAKAGE_DETECTED":
+        return {
+          text: "Drop Leak Detected",
+          class: "bg-danger/20 text-danger",
+          icon: <Activity className="w-5 h-5" />,
+        };
     }
   };
 

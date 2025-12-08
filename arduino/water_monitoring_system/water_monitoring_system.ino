@@ -237,7 +237,7 @@ void checkLeakSensor()
     // Read leak sensor (LOW = short circuit detected = water present)
     int leakSensorValue = digitalRead(LEAK_SENSOR_PIN);
 
-    if (leakSensorValue == LOW)
+    if (leakSensorValue == HIGH)
     {
         if (!leakDetected)
         {
@@ -311,7 +311,7 @@ void sendDataToFirebase()
     json.set("flowRate", flowRate);
     json.set("totalVolume", totalMilliLitres / 1000.0); // Convert to liters
     json.set("expectedFlow", expectedFlowRate);
-    json.set("leak", leakDetected);
+    json.set("dropLeakage", leakDetected); // Physical leak sensor (D5)
     json.set("timestamp", (int)now);
     json.set("status", getSystemStatus());
 
@@ -438,7 +438,7 @@ String getSystemStatus()
     // Physical leak detection has highest priority
     if (leakDetected)
     {
-        return "LEAKAGE_DETECTED";
+        return "DROP_LEAKAGE_DETECTED";
     }
 
     if (tdsValue < TDS_MIN_THRESHOLD || tdsValue > TDS_MAX_THRESHOLD)

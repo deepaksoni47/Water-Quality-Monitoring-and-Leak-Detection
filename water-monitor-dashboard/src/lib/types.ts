@@ -3,6 +3,7 @@ export interface SensorReading {
   flowRate: number;
   expectedFlow: number;
   totalVolume: number;
+  dropLeakage: boolean; // Physical leak sensor detection
   timestamp: number;
   status: SystemStatus;
 }
@@ -10,7 +11,8 @@ export interface SensorReading {
 export type SystemStatus =
   | "NORMAL"
   | "WATER_QUALITY_ISSUE"
-  | "LEAKAGE_DETECTED";
+  | "LEAKAGE_DETECTED"
+  | "DROP_LEAKAGE_DETECTED";
 
 export interface Alert {
   id: string;

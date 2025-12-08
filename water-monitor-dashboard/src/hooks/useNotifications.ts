@@ -24,6 +24,7 @@ export function useNotifications() {
   );
 
   const [lastAlertId, setLastAlertId] = useState<string>("");
+  const [lastStatusNotified, setLastStatusNotified] = useState<string>("");
 
   // Check if notifications are supported
   useEffect(() => {
@@ -210,9 +211,17 @@ export function useNotifications() {
       if (snapshot.exists()) {
         const data = snapshot.val();
         const status = data.status;
+        const timestamp = data.timestamp || Date.now();
+        const statusKey = `${status}-${timestamp}`;
+
+        // Only notify if this is a new status or timestamp
+        if (statusKey === lastStatusNotified) {
+          return; // Already notified for this status
+        }
 
         // Notify on critical status
         if (status === "LEAKAGE_DETECTED") {
+          setLastStatusNotified(statusKey);
           sendNotification("🚨 LEAKAGE DETECTED!", {
             body: `Flow rate deviation detected!\nActual: ${data.flowRate?.toFixed(
               2
@@ -222,6 +231,7 @@ export function useNotifications() {
           } as ExtendedNotificationOptions);
           playAlertSound();
         } else if (status === "WATER_QUALITY_ISSUE") {
+          setLastStatusNotified(statusKey);
           sendNotification("⚠️ Water Quality Alert", {
             body: `TDS level out of range: ${data.tds?.toFixed(
               1
@@ -230,12 +240,15 @@ export function useNotifications() {
             requireInteraction: true,
           } as ExtendedNotificationOptions);
           playAlertSound();
+        } else if (status === "NORMAL" && lastStatusNotified) {
+          // Clear tracking when status returns to normal
+          setLastStatusNotified("");
         }
       }
     });
 
     return () => unsubscribe();
-  }, [notificationState.enabled, sendNotification]);
+  }, [notificationState.enabled, sendNotification, lastStatusNotified]);
 
   return {
     ...notificationState,
