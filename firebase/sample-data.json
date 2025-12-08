@@ -1,0 +1,75 @@
+{
+  "readings": {
+    "current": {
+      "tds": 245,
+      "flowRate": 1.8,
+      "expectedFlow": 2.0,
+      "totalVolume": 15.5,
+      "timestamp": 1733702400000,
+      "status": "NORMAL",
+      "leak": false
+    },
+    "history": {
+      "-O9xK1ZmPqR": {
+        "tds": 230,
+        "flowRate": 1.7,
+        "timestamp": 1733698800000,
+        "leak": false
+      },
+      "-O9xK2AbCdE": {
+        "tds": 250,
+        "flowRate": 1.9,
+        "timestamp": 1733699400000,
+        "leak": false
+      },
+      "-O9xK3FgHiJ": {
+        "tds": 240,
+        "flowRate": 1.75,
+        "timestamp": 1733700000000,
+        "leak": false
+      }
+    }
+  },
+  "alerts": {
+    "-O9xK4KlMnO": {
+      "type": "high_tds",
+      "message": "High TDS detected: 450 ppm",
+      "timestamp": 1733701200000,
+      "acknowledged": false,
+      "tdsValue": 450
+    },
+    "-O9xK5PqRsT": {
+      "type": "leak",
+      "message": "Leak detected! Flow rate: 3.5 L/min",
+      "timestamp": 1733701800000,
+      "acknowledged": false,
+      "flowRate": 3.5
+    }
+  },
+  "system": {
+    "expectedFlowRate": 2.0,
+    "lastUpdate": 1733702400000,
+    "online": true,
+    "version": "1.0.0",
+    "wifiSignal": -45
+  },
+  "notifications": {
+    "enabled": true,
+    "sound": true,
+    "types": {
+      "leak": true,
+      "high_tds": true,
+      "low_tds": true,
+      "no_flow": true
+    }
+  },
+  "sensorData": {
+    "-O9xK6UvWxY": {
+      "tds": 245,
+      "flowRate": 1.8,
+      "timestamp": 1733702400000,
+      "leak": false,
+      "irStatus": false
+    }
+  }
+}
