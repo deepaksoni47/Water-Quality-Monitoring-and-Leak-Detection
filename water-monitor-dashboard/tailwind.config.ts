@@ -6,6 +6,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -16,6 +17,10 @@ const config: Config = {
         dark: {
           bg: "#1a1a2e",
           card: "#16213e",
+        },
+        light: {
+          bg: "#f5f7fa",
+          card: "#ffffff",
         },
       },
       animation: {

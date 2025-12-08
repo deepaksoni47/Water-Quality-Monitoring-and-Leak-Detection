@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
-/* Force dark theme always */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #f5f7fa;
+  --foreground: #1a1a2e;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
 }
 
 @theme inline {
@@ -13,13 +16,46 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a2e;
+    --foreground: #ededed;
+    --card-bg: #16213e;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+  }
+}
+
+/* Dark mode class */
+.dark {
+  --background: #1a1a2e;
+  --foreground: #ededed;
+  --card-bg: #16213e;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+}
+
+/* Custom Tailwind utilities for CSS variables */
+@layer utilities {
+  .bg-card-bg {
+    background-color: var(--card-bg);
+  }
+  
+  .text-foreground {
+    color: var(--foreground);
+  }
+  
+  .border-themed {
+    border-color: var(--border-color);
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  /* Force dark mode */
-  color-scheme: dark;
-}
 }
 
 /* Smooth scrolling */

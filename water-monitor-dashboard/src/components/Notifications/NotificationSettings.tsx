@@ -27,11 +27,11 @@ export default function NotificationSettings() {
   };
 
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Settings className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-bold text-white">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
             Notification Settings
           </h3>
         </div>
@@ -45,7 +45,7 @@ export default function NotificationSettings() {
 
       {/* Status Summary */}
       <div className="mb-4">
-        <div className="flex items-center gap-3 p-3 bg-dark-bg rounded-lg">
+        <div className="flex items-center gap-3 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
           {enabled ? (
             <>
               <BellRing className="w-5 h-5 text-success animate-pulse" />
@@ -60,7 +60,7 @@ export default function NotificationSettings() {
             <>
               <Bell className="w-5 h-5 text-gray-400" />
               <div className="flex-1">
-                <p className="text-gray-300 font-medium">
+                <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Notifications Disabled
                 </p>
                 <p className="text-gray-400 text-xs">
@@ -77,7 +77,7 @@ export default function NotificationSettings() {
           {/* Enable/Disable Notifications */}
           {!enabled && permission !== "denied" && (
             <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg">
-              <p className="text-white font-medium mb-3">
+              <p className="text-gray-900 dark:text-white font-medium mb-3">
                 Enable browser notifications to receive alerts
               </p>
               <button
@@ -109,7 +109,7 @@ export default function NotificationSettings() {
           )}
 
           {/* Sound Settings */}
-          <div className="p-4 bg-dark-bg rounded-lg border border-gray-800">
+          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {soundEnabled ? (
@@ -118,8 +118,10 @@ export default function NotificationSettings() {
                   <VolumeX className="w-5 h-5 text-gray-500" />
                 )}
                 <div>
-                  <p className="text-white font-medium">Alert Sound</p>
-                  <p className="text-gray-400 text-xs">
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    Alert Sound
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     Play sound for critical alerts
                   </p>
                 </div>
@@ -140,13 +142,15 @@ export default function NotificationSettings() {
           </div>
 
           {/* Alert Types */}
-          <div className="p-4 bg-dark-bg rounded-lg border border-gray-800">
-            <p className="text-white font-medium mb-3">Alert Types</p>
+          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
+            <p className="text-gray-900 dark:text-white font-medium mb-3">
+              Alert Types
+            </p>
             <div className="space-y-2">
               <div className="flex items-center justify-between p-2 bg-card-bg rounded">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-danger"></div>
-                  <span className="text-gray-300 text-sm">
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">
                     Leakage Detection
                   </span>
                 </div>
@@ -157,7 +161,7 @@ export default function NotificationSettings() {
               <div className="flex items-center justify-between p-2 bg-card-bg rounded">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-warning"></div>
-                  <span className="text-gray-300 text-sm">
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">
                     Water Quality Issues
                   </span>
                 </div>
@@ -168,7 +172,7 @@ export default function NotificationSettings() {
               <div className="flex items-center justify-between p-2 bg-card-bg rounded">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  <span className="text-gray-300 text-sm">
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">
                     System Status Changes
                   </span>
                 </div>
@@ -183,7 +187,7 @@ export default function NotificationSettings() {
           {enabled && (
             <button
               onClick={handleTestNotification}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all font-medium border border-gray-700"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-700 dark:bg-gray-800 text-white rounded-lg hover:bg-gray-600 dark:hover:bg-gray-700 transition-all font-medium border border-gray-600 dark:border-gray-700"
             >
               <Bell className="w-4 h-4" />
               Send Test Notification
@@ -193,9 +197,10 @@ export default function NotificationSettings() {
           {/* Info */}
           <div className="p-3 bg-primary/5 border border-primary/20 rounded-lg">
             <p className="text-gray-400 text-xs leading-relaxed">
-              💡 <strong className="text-white">Tip:</strong> Notifications work
-              even when the browser is in the background. Make sure your
-              device&apos;s Do Not Disturb mode is off to receive alerts.
+              💡 <strong className="text-gray-900 dark:text-white">Tip:</strong>{" "}
+              Notifications work even when the browser is in the background.
+              Make sure your device&apos;s Do Not Disturb mode is off to receive
+              alerts.
             </p>
           </div>
         </div>

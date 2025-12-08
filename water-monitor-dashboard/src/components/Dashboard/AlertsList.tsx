@@ -38,7 +38,7 @@ export default function AlertsList({ alerts }: AlertsListProps) {
   };
 
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 shadow-lg">
+    <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
         <AlertCircle className="w-6 h-6" />
         Recent Alerts
@@ -64,7 +64,7 @@ export default function AlertsList({ alerts }: AlertsListProps) {
           {alerts.map((alert) => (
             <div
               key={alert.id}
-              className="bg-dark-bg border border-gray-800 rounded-lg p-4 hover:border-primary/50 transition-all duration-300"
+              className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-4 hover:border-primary/50 transition-all duration-300"
             >
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">

@@ -54,7 +54,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
+      <div className="min-h-screen bg-light-bg dark:bg-dark-bg flex items-center justify-center">
         <div className="text-center">
           <motion.div
             className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary mx-auto mb-4"
@@ -63,7 +63,7 @@ export default function Dashboard() {
             transition={{ duration: 0.3 }}
           />
           <motion.p
-            className="text-gray-400"
+            className="text-gray-600 dark:text-gray-400"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -77,15 +77,15 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
+      <div className="min-h-screen bg-light-bg dark:bg-dark-bg flex items-center justify-center">
         <motion.div
           className="text-center max-w-md mx-auto p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <p className="text-danger text-xl mb-2">Error loading data</p>
-          <p className="text-gray-400 mb-4">{error}</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-500">
             Make sure Firebase database rules are deployed and sample data is
             imported.
           </p>
@@ -103,7 +103,7 @@ export default function Dashboard() {
     : { text: "Waiting...", class: "bg-gray-500/20 text-gray-400" };
 
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <div className="max-w-7xl mx-auto p-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}

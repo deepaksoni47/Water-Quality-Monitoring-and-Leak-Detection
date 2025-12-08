@@ -10,7 +10,7 @@ export default function MetricCard({
   info,
 }: MetricCardProps) {
   return (
-    <div className="bg-card-bg border border-gray-800 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-primary/20">
+    <div className="bg-card-bg border border-gray-300 dark:border-gray-800 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-primary/20">
       <div className="flex items-start justify-between mb-4">
         {icon}
         {info && (
